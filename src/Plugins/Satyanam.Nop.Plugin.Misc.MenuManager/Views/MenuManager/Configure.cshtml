@@ -1,0 +1,224 @@
+﻿@model Satyanam.Nop.Plugin.Misc.MenuManager.Models.MenuSettingsViewModel
+@{
+    Layout = "_ConfigurePlugin";
+}
+@await Component.InvokeAsync("StoreScopeConfiguration")
+<form asp-controller="MenuManager" asp-action="Configure" method="post">
+    <div class="caed-group">
+        <div class="card card-default">
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="IncludeTopics_OverrideForStore"  asp-input="IncludeTopics" asp-store-scope="Model.ActiveStoreScopeConfiguration"/>
+                        <nop-label asp-for="IncludeTopics" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="IncludeTopics" />
+                        <span asp-validation-for="IncludeTopics"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="ShowTopicContentHover_OverrideForStore" asp-input="ShowTopicContentHover" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="ShowTopicContentHover" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ShowTopicContentHover" />
+                        <span asp-validation-for="ShowTopicContentHover"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="DisplayWithPicture_OverrideForStore" asp-input="DisplayWithPicture" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="DisplayWithPicture" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DisplayWithPicture" />
+                        <span asp-validation-for="DisplayWithPicture"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="SubMenuPictureSize_OverrideForStore" asp-input="SubMenuPictureSize" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="SubMenuPictureSize" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="SubMenuPictureSize" />
+                        <span asp-validation-for="SubMenuPictureSize"></span>
+                    </div>
+                </div>
+                <div class="form-group row" style="display:none">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="DisplayTitle_OverrideForStore" asp-input="DisplayTitle" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="DisplayTitle" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DisplayTitle" />
+                        <span asp-validation-for="DisplayTitle"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="StickMenuOnTop_OverrideForStore" asp-input="StickMenuOnTop" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="StickMenuOnTop" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="StickMenuOnTop" />
+                        <span asp-validation-for="StickMenuOnTop"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="HiddenCategoryIfNoProduct_OverrideForStore" asp-input="HiddenCategoryIfNoProduct" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="HiddenCategoryIfNoProduct" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="HiddenCategoryIfNoProduct" />
+                        <span asp-validation-for="HiddenCategoryIfNoProduct"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="BackgroundColor_OverrideForStore" asp-input="BackgroundColor" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="BackgroundColor" />
+                    </div>
+                    <div class="col-md-5">
+                        <nop-editor asp-for="BackgroundColor" />
+                        <span asp-validation-for="BackgroundColor"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="FontSize_OverrideForStore" asp-input="FontSize" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="FontSize" />
+                    </div>
+                    <div class="col-md-5">
+                        <nop-editor asp-for="FontSize" />
+                        <span asp-validation-for="FontSize"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="FontStyle_OverrideForStore" asp-input="FontStyle" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="FontStyle" />
+                    </div>
+                    <div class="col-md-5">
+                        <nop-editor asp-for="FontStyle" />
+                        <span asp-validation-for="FontStyle"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="FontColor_OverrideForStore" asp-input="FontColor" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="FontColor" />
+                    </div>
+                    <div class="col-md-5">
+                        <nop-editor asp-for="FontColor" />
+                        <span asp-validation-for="FontColor"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="MobMenuBackHeader_OverrideForStore" asp-input="MobMenuBackHeader" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="MobMenuBackHeader" />
+                    </div>
+                    <div class="col-md-5">
+                        <nop-editor asp-for="MobMenuBackHeader" />
+                        <span asp-validation-for="MobMenuBackHeader"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="ExistingPicture" style="display:none;">
+                    <div class="col-md-5" style="font-weight:bold">
+                        <nop-label asp-for="BgPictureUrl" />
+                    </div>
+                    <div class="col-md-7">
+                        <img id="BgPictureUrl" src="@(Model.BgPictureUrl)" alt="avatar" /><br />
+                    </div>
+                </div>
+                <div class="form-group" id="PictureUploader">
+                    <div class="col-md-5" style="font-weight:bold">
+                        <nop-override-store-checkbox asp-for="BgPictureId_OverrideForStore" asp-input="BgPictureId" asp-store-scope="Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="BgPictureId" />
+                    </div>
+                    <div class="col-md-7">
+                        <nop-editor asp-for="BgPictureId" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T(" Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+        $(document).ready(function () {
+
+            var category = document.getElementById('IncludeCategories');
+
+            var showCategoryMenu_override = document.getElementById('ShowCategoryInSingleMenu_OverrideForStore');
+            var showCategoryMenu = document.getElementById('ShowCategoryInSingleMenu');
+
+            if (category.checked && showCategoryMenu_override.checked) {
+                showCategoryMenu.disabled = false;
+            }
+            else if (category.checked) {
+                showCategoryMenu.disabled = true;
+            }
+            else if (showCategoryMenu_override.checked) {
+                showCategoryMenu.disabled = true;
+            }
+            else {
+                showCategoryMenu.disabled = true;
+            }
+
+            category.onchange = function () {
+
+                if (this.checked && showCategoryMenu_override.checked) {
+                    showCategoryMenu.disabled = false;
+                }
+                else {
+                    showCategoryMenu.checked = false;
+                    showCategoryMenu.disabled = true;
+                }
+            }
+
+            showCategoryMenu_override.onchange = function () {
+
+                if (this.checked && category.checked) {
+                    showCategoryMenu.disabled = false;
+                }
+                else {
+                    showCategoryMenu.checked = false;
+                    showCategoryMenu.disabled = true;
+                }
+            }
+
+        });
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#@Html.IdFor(model => model.DisplayWithPicture)").click(toggleDisplayPictureOptions);
+
+                toggleDisplayPictureOptions();
+            });
+
+            function toggleDisplayPictureOptions() {
+                if ($('#@Html.IdFor(model => model.DisplayWithPicture)').is(':checked')) {
+                    $('#pnlSubMenuPictureSize').show();
+                    $('#pnlDisplayTitle').show();
+                } else {
+                    $('#pnlSubMenuPictureSize').hide();
+                    $('#pnlDisplayTitle').hide();
+                }
+            }
+
+    </script>

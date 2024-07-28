@@ -1,0 +1,64 @@
+﻿@model FooterModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Topics
+@using Nop.Services.Configuration
+@using Nop.Web.Models.Common
+
+@inject ISettingService settingService
+@inject IStoreContext storeContext
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var footerLayout = await settingService.GetSettingByKeyAsync("uptownthemesettings.footerlayout", "footer-1", storeId, true);
+    var isFooter1 = string.Compare(footerLayout, "footer-1", StringComparison.InvariantCultureIgnoreCase) == 0;
+}
+
+<div class="footer @footerLayout">
+    <div class="footer-upper">
+        @if (isFooter1)
+        {
+            @* @await Component.InvokeAsync("Widget", new { widgetZone = "uptown_footer_social_feed" }) *@
+            @* @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent)) *@
+        }
+        else
+        {
+            <div class="footer-centering">
+                @await Html.PartialAsync("_Footer.Blocks", Model)
+            </div>
+        }
+    </div>
+
+    @if (isFooter1)
+    {
+        <div class="footer-middle">
+            <div class="footer-centering">
+                @await Html.PartialAsync("_Footer.Blocks", Model)
+            </div>
+        </div>
+    }
+
+    <div class="footer-lower">
+        @if (isFooter1)
+        {
+            @await Html.PartialAsync("_Footer.Lower", Model)
+        }
+        else
+        {
+            <div class="footer-centering">
+                <div class="footer-lower-right">
+                    <ul class="accepted-payment-methods">
+                        <li class="method1"></li>
+                        <li class="method2"></li>
+                        <li class="method3"></li>
+                        <li class="method4"></li>
+                    </ul>
+                </div>
+                <div class="footer-lower-left">
+                    @await Html.PartialAsync("_Footer.Lower", Model)
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.Footer, additionalData = Model })

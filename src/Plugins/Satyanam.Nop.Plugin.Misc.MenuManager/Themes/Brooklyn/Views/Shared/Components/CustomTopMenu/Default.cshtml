@@ -1,0 +1,219 @@
+﻿@model Satyanam.Nop.Plugin.Misc.MenuManager.Models.MenuSettingsViewModel
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI;
+@using Satyanam.Nop.Plugin.Misc.MenuManager;
+@{
+
+
+    NopHtml.AddCssFileParts("~/Plugins/Misc.MenuManager/Themes/Brooklyn/Content/Menumanager.css");
+    var isRtl = await Html.ShouldUseRtlThemeAsync();
+}
+@{
+    var menuManagerSettings = EngineContext.Current.Resolve<MenuManagerSettings>();
+    var fontcolor = menuManagerSettings.FontColor;
+    var bgcolor = menuManagerSettings.BackgroundColor;
+    var fontsize = menuManagerSettings.FontSize;
+    var fontfamily = menuManagerSettings.FontStyle;
+}
+
+<style type="text/css">
+
+    .top-menu > li > a, .top-menu > li > span {
+        color: @fontcolor;
+        font-size: @fontsize;
+        font-family: @fontfamily;
+    }
+
+    .top-menu {
+        background-size:contain;
+        background: @bgcolor;
+        background-image: url("@Model.BgPictureUrl");
+        background-repeat: repeat-x;
+    }
+</style>
+@{
+    var stickMenu = menuManagerSettings.StickMenuOnTop;
+    }
+
+    <text>
+        @if (Model.StickMenuOnTop)
+        {
+        <div id="menuManager">
+            <ul class="@ViewBag.MainMenuClass">
+                @Html.Raw(ViewBag.MenuItems)
+            </ul>
+        </div>
+        <div id="menuAlias"></div>
+        <script>
+            $(function () {
+                // Check the initial Poistion of the Sticky Header
+                var stickyHeaderTop = $('#menuManager').offset().top;
+
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > stickyHeaderTop) {
+                        $('#menuManager').css({ position: 'fixed', top: '0px', left: '0px' });
+                        $('#menuAlias').css('display', 'block');
+                    } else {
+                        $('#menuManager').css({ position: 'static', top: '0px', left: '0px' });
+                        $('#menuAlias').css('display', 'none');
+                    }
+                });
+            });
+        </script>
+        }
+        else
+        {
+        <ul class="@ViewBag.MainMenuClass">
+            @Html.Raw(ViewBag.MenuItems)
+        </ul>
+
+        }
+
+    </text>
+    <text>
+        @if (stickMenu)
+        {
+        <div id="menuStickMobile">
+            @*<div id="mob-menu-button">
+                <a href="">
+                    <span class="icon"><span class="line"></span><span class="line"></span><span class="line"></span></span>
+                    <span>&nbsp;</span>
+                </a>
+            </div>*@
+            @if (ViewBag.SupportResponsive)
+            {
+            <text>
+                <ul class="mob-top-menu">
+                    @Html.Raw(ViewBag.MenuItems)
+                </ul>
+            </text>
+            }
+
+
+        </div>
+        <div id="menuAlias"></div>
+        <script>
+            $(function () {
+                // Check the initial Poistion of the Sticky Header
+                var stickyHeaderTop = $('#menuStickMobile').offset().top;
+
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > stickyHeaderTop) {
+                        $('#menuStickMobile').css({ position: 'fixed', top: '0px', left: '0px' });
+                        $('#menuAlias').css('display', 'block');
+
+                    } else {
+                        $('#menuStickMobile').css({ position: 'static', top: '0px', left: '0px' });
+                        $('#menuAlias').css('display', 'none');
+                    }
+                });
+            });
+        </script>
+        }
+        else
+        {
+
+        if (ViewBag.SupportResponsive)
+        {
+        <text>
+            <ul class="mob-top-menu">
+                @Html.Raw(ViewBag.MenuItems)
+            </ul>
+        </text>
+        }
+
+        }
+
+    </text>
+
+
+
+    <script>
+
+        $('li', '.top-menu').on('mouseenter', function () {
+            $('a', $(this)).first().addClass('hover');
+            if (!$(this).parent().hasClass('top-menu')) {
+                var width = $(this).innerWidth();
+                $('.sublist', $(this)).first().css('@(isRtl ? "right" : "left")', width + 15);
+                $('.subNoPic', $(this)).first().css('@(isRtl ? "right" : "left")', width + 15);
+            }
+            $('.sublist', $(this)).first().addClass('active');
+            $('.subNoPic', $(this)).first().addClass('active');
+            $('.top-menu-triangle', $(this)).addClass('active');
+        });
+
+        $('li', '.top-menu').on('mouseleave', function () {
+            $('a', $(this)).first().removeClass('hover');
+            $('.sublist', $(this)).first().removeClass('active');
+            $('.subNoPic', $(this)).first().removeClass('active');
+            $('.top-menu-triangle', $(this)).removeClass('active');
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $('.mob-top-menu .top-menu-triangle').click(function () {
+                $(this).siblings('.sublist').addClass('active');
+                $(this).siblings('.subNoPic').addClass('active');
+
+                $('.sublist span').click(function () {
+                    $('.mob-top-menu .sublist.firstLevel').removeClass('active');
+                });
+                $('.subNoPic span').click(function () {
+                    $('.mob-top-menu .subNoPic').removeClass('active');
+                });
+
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("div").remove(".wishlist-shoping");
+
+            $('.header-menu .top-menu').on('mouseenter', '.flyOver', function () {
+                $('#flyout-cart').addClass('active');
+            });
+            $('.header-menu .top-menu').on('mouseleave', '.flyOver', function () {
+                $('#flyout-cart').removeClass('active');
+            });
+            $('.header-menu .top-menu').on('mouseenter', '#flyout-cart', function () {
+                $('#flyout-cart').addClass('active');
+            });
+            $('.header-menu .top-menu').on('mouseleave', '#flyout-cart', function () {
+                $('#flyout-cart').removeClass('active');
+            });
+        });
+
+    </script>
+    <script src="~/Plugins/Misc.MenuManager/Scripts/jquery.slimscroll.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $(".mob-top-menu").slimscroll({
+                alwaysvisible: true,
+            });
+        });
+
+        //Arrows
+        $(".mob-top-menu .top-menu-triangle").click(function () {
+
+            if ($(this).css("transform") == 'none') {
+                $(this).css("transform", "rotate(90deg)");
+                $(this).next('ul').slideToggle(400);
+
+            }
+            else {
+                $(this).css("transform", "");
+                $(this).next('ul').slideUp(400);
+            }
+
+        });
+
+    </script>

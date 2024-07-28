@@ -1,0 +1,15 @@
+[
+  {
+    "Type": "Plugin",
+    "SystemName": "ExportReports",
+    "SupportedVersion": "4.50",
+    "DirectoryPath": "Export/Nasca.Plugin.Export.Reports-4.50/Nasca.Plugin.Export.Reports"
+  },
+
+  {
+    "Type": "Plugin",
+    "SystemName": "ExportReports",
+    "SupportedVersion": "4.60",
+    "DirectoryPath": "Export/Nasca.Plugin.Export.Reports-4.60/Nasca.Plugin.Export.Reports"
+  }
+]

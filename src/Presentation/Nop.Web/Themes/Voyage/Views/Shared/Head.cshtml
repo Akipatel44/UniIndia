@@ -1,0 +1,38 @@
+﻿@using Nop.Core
+@using Nop.Core.Domain.Catalog
+
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = (await workContext.GetWorkingLanguageAsync()).Rtl;
+
+    if (supportRtl)
+    {
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/1260.rtl.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/768.rtl.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/mobile.rtl.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/styles.rtl.css");
+    }
+    else
+    {
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/1260.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/768.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/mobile.css");
+        NopHtml.AppendCssFileParts("~/Themes/Voyage/Content/css/styles.css");
+    }
+
+    if (catalogSettings.DisplayAllPicturesOnCatalogPages)
+    {
+        NopHtml.AppendCssFileParts("~/lib_npm/swiper/swiper-bundle.min.css");
+    }
+
+    NopHtml.AppendCssFileParts("~/Plugins/SevenSpikes.Core/Styles/perfect-scrollbar.min.css");
+
+    <script src="~/Plugins/SevenSpikes.Core/Scripts/footable.min.js" asp-location="Footer"></script>
+    <script src="~/Plugins/SevenSpikes.Core/Scripts/perfect-scrollbar.min.js" asp-location="Footer"></script>
+    <script src="~/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" asp-location="Footer"></script>
+    <script src="~/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.min.js" asp-location="Footer"></script>
+
+    <script src="~/Themes/Voyage/Content/scripts/voyage.js" asp-location="Footer"></script>
+}

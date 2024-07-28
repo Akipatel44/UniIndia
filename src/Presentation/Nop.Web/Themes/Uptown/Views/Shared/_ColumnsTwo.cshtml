@@ -1,0 +1,157 @@
+﻿@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+
+@{
+    Layout = "_Root";
+
+    var currentController = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var currentAction = Url.ActionContext.RouteData.Values["action"].ToString();
+
+    //current category ID
+    var currentCategoryId = 0;
+    if (currentController.Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        currentAction.Equals("category", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentCategoryId = Convert.ToInt32(Url.ActionContext.RouteData.Values["categoryId"].ToString());
+    }
+
+    //current manufacturer ID
+    var currentManufacturerId = 0;
+    if (currentController.Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        currentAction.Equals("manufacturer", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentManufacturerId = Convert.ToInt32(Url.ActionContext.RouteData.Values["manufacturerId"].ToString());
+    }
+
+    //current product ID
+    var currentProductId = 0;
+    if (currentController.Equals("product", StringComparison.InvariantCultureIgnoreCase) &&
+        currentAction.Equals("productdetails", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentProductId = Convert.ToInt32(Url.ActionContext.RouteData.Values["productId"].ToString());
+    }
+
+    var currentStoreId = (await storeContext.GetCurrentStoreAsync()).Id;
+
+    var isOneColumn = await settingService.GetSettingByKeyAsync("uptownthemesettings.iscategorypageonecolumn", false, currentStoreId, true);
+    var categoryNavigationEnabled = await settingService.GetSettingByKeyAsync("uptownthemesettings.isdefaultcategorynavigationenabled", false, currentStoreId, true);
+    var manufacturerNavigationEnabled = await settingService.GetSettingByKeyAsync("uptownthemesettings.isdefaultmanufacturernavigationenabled", false, currentStoreId, true);
+    var vendorNavigationEnabled = await settingService.GetSettingByKeyAsync("uptownthemesettings.isdefaultvendornavigationenabled", false, currentStoreId, true);
+
+    var isCustomerAccountPage = currentController.Equals("customer", StringComparison.InvariantCultureIgnoreCase);
+    var isOrderListPage = currentController.Equals("order", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customerorders", StringComparison.InvariantCultureIgnoreCase);
+    var isReturnRequest = currentController.Equals("returnrequest", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customerreturnrequests", StringComparison.InvariantCultureIgnoreCase);
+    var isBackInStockSubscriptions = currentController.Equals("backinstocksubscription", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customersubscriptions", StringComparison.InvariantCultureIgnoreCase);
+    var isRewardPoints = currentController.Equals("order", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customerrewardpoints", StringComparison.InvariantCultureIgnoreCase);
+    var isForumSubscriptions = currentController.Equals("boards", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customerforumsubscriptions", StringComparison.InvariantCultureIgnoreCase); ;
+    var isMyProductReviews = currentController.Equals("product", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("customerproductreviews", StringComparison.InvariantCultureIgnoreCase);
+    var isVendorInfo = currentController.Equals("vendor", StringComparison.InvariantCultureIgnoreCase) && currentAction.Equals("info", StringComparison.InvariantCultureIgnoreCase);
+    var isHelpDeskPage = currentController.Equals("helpdesk", StringComparison.InvariantCultureIgnoreCase);
+
+    isCustomerAccountPage = isCustomerAccountPage || isOrderListPage || isReturnRequest || isBackInStockSubscriptions || isRewardPoints || isForumSubscriptions || isMyProductReviews || isVendorInfo || isHelpDeskPage;
+
+    if (isCustomerAccountPage ||
+        currentController.Equals("order", StringComparison.InvariantCultureIgnoreCase) ||
+        currentController.Equals("blog", StringComparison.InvariantCultureIgnoreCase) ||
+        currentController.Equals("richblog", StringComparison.InvariantCultureIgnoreCase) ||
+        currentController.Equals("richblogsearch", StringComparison.InvariantCultureIgnoreCase) ||
+        (currentController.Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        currentAction.Equals("producttagsall", StringComparison.InvariantCultureIgnoreCase)))
+    {
+        isOneColumn = false;
+    }
+}
+
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    } 
+}
+
+@if (IsSectionDefined("SubCategories"))
+{
+    @RenderSection("SubCategories")
+}
+
+@if (isOneColumn)
+{
+    <div class="center-1 center-2">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
+        @{
+            var ajaxFiltersOneColumnWidget = await Component.InvokeAsync("Widget", new { widgetZone = "ajax_filters_when_one_column" });
+        }
+        @if (!string.IsNullOrEmpty(await ajaxFiltersOneColumnWidget.RenderHtmlContentAsync()))
+        {
+            <div class="uptown-one-column-ajax-filters-wrapper">@ajaxFiltersOneColumnWidget</div>
+        }
+        @RenderBody()
+        <div class="onecolumn-category-block-wrapper">
+            @if (categoryNavigationEnabled)
+            {
+                @await Component.InvokeAsync(typeof(CategoryNavigationViewComponent), new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+            }
+            @if (manufacturerNavigationEnabled)
+            {
+                @await Component.InvokeAsync(typeof(ManufacturerNavigationViewComponent), new { currentManufacturerId = currentManufacturerId })
+            }
+            @if (vendorNavigationEnabled)
+            {
+                @await Component.InvokeAsync(typeof(VendorNavigationViewComponent))
+            }
+        </div>
+        @await RenderSectionAsync("CatalogFilters", false)
+        @await Component.InvokeAsync(typeof(PopularProductTagsViewComponent))
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+    </div>
+}
+else
+{
+    /* We need the side to be before center on customer pages, because of the styling */
+    if (isCustomerAccountPage)
+    {
+        <div class="account-page-navigation">
+            @if (IsSectionDefined("left"))
+            {
+                @await RenderSectionAsync("left")
+            }
+        </div>
+        <div class="center-1">
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
+            @RenderBody()
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+        </div>
+    }
+    else
+    {
+        <div class="center-2">
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
+            @RenderBody()
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+        </div>
+        <div class="side-2">
+            @if (IsSectionDefined("left"))
+            {
+                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
+                @await RenderSectionAsync("left")
+                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
+            }
+            else
+            {
+		        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
+		        @await RenderSectionAsync("CatalogFilters", false);
+		        @await Component.InvokeAsync(typeof(CategoryNavigationViewComponent), new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+		        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfterCategoryNavigation })
+		        @await Component.InvokeAsync(typeof(ManufacturerNavigationViewComponent), new { currentManufacturerId = currentManufacturerId })
+		        @await Component.InvokeAsync(typeof(VendorNavigationViewComponent))
+		        @await Component.InvokeAsync(typeof(RecentlyViewedProductsBlockViewComponent), new { productThumbPictureSize = 64 })
+		        @await Component.InvokeAsync(typeof(PopularProductTagsViewComponent))
+		        @await Component.InvokeAsync(typeof(PollBlockViewComponent), new { systemKeyword = "LeftColumnPoll" })
+		        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
+            }
+        </div>
+    }
+}

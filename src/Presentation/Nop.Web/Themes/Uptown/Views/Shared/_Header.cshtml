@@ -1,0 +1,78 @@
+﻿@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var headerLayout = await settingService.GetSettingByKeyAsync("uptownthemesettings.headerlayout", "header-1", storeId, true);
+    var isHeader1 = String.Compare(headerLayout, "header-1", true) == 0;
+}
+<div class="header @headerLayout">
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+    <div class="header-upper">
+        <div class="header-centering">
+           @*  <div class="header-welcome-message">
+                @T("SevenSpikes.Themes.Uptown.Common.Welcome")
+            </div> *@
+            @if (isHeader1)
+            {
+                @* @await Html.PartialAsync("_HeaderSocials") *@
+            }
+            <div class="header-upper-centering">
+                <div class="header-links-selectors-wrapper">
+                    <div class="header-links-wrapper">
+                        @await Component.InvokeAsync(typeof(HeaderLinksViewComponent))
+                    </div>
+
+                    <div class="header-selectors-wrapper">
+			            @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+			            @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+			            @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+			            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+                    </div>
+                </div>
+                @if (!isHeader1)
+                {
+                    @* @await Html.PartialAsync("_HeaderSocials") *@
+                }
+            </div>
+        </div>
+    </div>
+    <div class="header-lower">
+        <div class="header-centering">
+            <div class="header-logo">
+                @await Component.InvokeAsync(typeof(LogoViewComponent))
+            </div>
+            <div class="header-cart-search-wrapper">
+                 @await Component.InvokeAsync(typeof(FlyoutShoppingCartViewComponent)) 
+                <div class="search-box store-search-box">
+                    @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+                </div>
+            </div>
+            @if (isHeader1)
+            {
+                <div class="header-menu-wrapper">
+                    <div class="header-menu">
+                        <div class="close-menu">
+                            <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                        </div>
+                        @{
+                            var menuHtml = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+                        }
+                        @if (!String.IsNullOrEmpty(await menuHtml.RenderHtmlContentAsync()))
+                        {
+                            @menuHtml
+                        }
+                        else
+                        {
+                            @await Component.InvokeAsync("TopMenu")
+                        }
+                        @* @await Html.PartialAsync("_HeaderSocials") *@
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

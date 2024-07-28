@@ -1,0 +1,129 @@
+﻿@using Nop.Core
+@using Nop.Services.Configuration
+@using Nop.Services.Security
+@using Nop.Core.Domain.Orders
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+@inject IPermissionService permissionService
+@inject ShoppingCartSettings shoppingCartSettings
+
+@{
+    Layout = "_Root.Head";
+}
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@{ await Html.RenderPartialAsync("_Notifications"); }
+@{ await Html.RenderPartialAsync("_JavaScriptDisabledWarning"); }
+@{ await Html.RenderPartialAsync("_OldInternetExplorerWarning"); }
+
+@{
+    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase);
+}
+
+@{
+    var currentStoreId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var numberOfItemBoxesClass = String.Empty;
+    if (isHomePage)
+    {
+        numberOfItemBoxesClass = (await settingService.GetSettingByKeyAsync("uptownthemesettings.HomePageItemBoxesPerRow", "home-items-per-row-four", currentStoreId, true)).ToLowerInvariant();
+    }
+    else
+    {
+        numberOfItemBoxesClass = (await settingService.GetSettingByKeyAsync("uptownthemesettings.CatalogPagesItemBoxesPerRow", "items-per-row-three", currentStoreId, true)).ToLowerInvariant();
+    }
+    var headerLayout = await settingService.GetSettingByKeyAsync("uptownthemesettings.headerlayout", "header-1", currentStoreId, true);
+    var isHeader2 = String.Compare(headerLayout, "header-2", true) == 0;
+    var isOneColumn = await settingService.GetSettingByKeyAsync("uptownthemesettings.iscategorypageonecolumn", false, currentStoreId, true);
+    var columnsCass = isOneColumn ? "one-column" : "two-columns";
+
+    var isShoppingCartEnabled = await permissionService.AuthorizeAsync(StandardPermissionProvider.EnableShoppingCart) && shoppingCartSettings.MiniShoppingCartEnabled;
+}
+
+<div class="master-wrapper-page @numberOfItemBoxesClass @columnsCass">
+    @await Component.InvokeAsync(typeof(AdminHeaderLinksViewComponent))
+
+    <div class="overlayOffCanvas"></div>
+
+    @{ await Html.RenderPartialAsync("_Header"); }
+
+    <script asp-location="Footer">
+        var localized_data = {
+            AjaxCartFailure: "@T("AjaxCart.Failure")"
+        };
+        AjaxCart.init(false, '.header .cart-wrapper .cart-qty', '.header-links .wishlist-qty', '.cart-wrapper', localized_data);
+    </script>
+
+    <div class="responsive-nav-wrapper-parent">
+        <div class="responsive-nav-wrapper">
+            <div class="menu-title">
+                <span>@T("SevenSpikes.Themes.Common.MenuTitle")</span>
+            </div>
+            <div class="personal-button" id="header-links-opener">
+                <span>@T("SevenSpikes.Themes.Common.Personal")</span>
+            </div>
+            <div class="account-links" id="account-links">
+                <span>@T("Account.MyAccount")</span>
+            </div>
+            <div class="filters-button">
+                <span>@T("SevenSpikes.Themes.Common.Filters")</span>
+            </div>
+            <div class="search-wrap">
+                <span>@T("Search")</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-slider-wrapper">
+
+        @if (isHomePage)
+        {
+            @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_main_slider" })
+        }
+        else
+        {
+            @await Component.InvokeAsync("Widget", new { widgetZone = "main_slider_not_on_home_page" })
+        }
+
+        @if (isHeader2)
+        {
+            <div class="header-menu-wrapper">
+                <div class="header-menu">
+                    <div class="close-menu">
+                        <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                    </div>
+                    @{
+                        var menuHtml = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+                    }
+                    @if (!String.IsNullOrEmpty(await menuHtml.RenderHtmlContentAsync()))
+                    {
+                        @menuHtml
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync(typeof(TopMenuViewComponent))
+                    }
+
+                    @* @await Html.PartialAsync("_HeaderSocials") *@
+                </div>
+            </div>
+        }
+
+    </div>
+
+    @await RenderSectionAsync("Breadcrumb", false)
+
+    <div class="master-wrapper-content">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
+        @await Component.InvokeAsync("Widget", new { widgetZone = "uptown_color_squares" })
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentAfter })
+    </div>
+    @await Component.InvokeAsync(typeof(FooterViewComponent))
+</div>
+@await Component.InvokeAsync(typeof(EuCookieLawViewComponent))
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })
+
+<input id="isShoppingCartEnabled" type="hidden" value="@isShoppingCartEnabled.ToString().ToLowerInvariant()" />

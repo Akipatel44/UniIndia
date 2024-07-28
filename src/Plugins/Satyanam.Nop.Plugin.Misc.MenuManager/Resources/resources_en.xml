@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Language Name="English" SupportedVersion="4.00">
+  <LocaleResource Name="MenuManager.currentPicture">
+    <Value>Current Picture</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.CurrentMenu">
+    <Value>Current Menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.Title">
+    <Value>Title</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.Picture">
+    <Value>Picture</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ParentMenu">
+    <Value>Parent Menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.Category">
+    <Value>Category</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.Manufacturer">
+    <Value>Manufacturer</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.Topics">
+    <Value>Topics</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.MenuOrder">
+    <Value>Menu Order</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.PermanentRedirectUrl">
+    <Value>Menu URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.IsActive">
+    <Value>Active</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.EditMenu">
+    <Value>Edit Menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="  MenuManager.CurrentMenu">
+    <Value>Current Menus</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ManageMenu">
+    <Value>Manage Menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.IncludeCategories">
+    <Value>Include Categories</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ShowCategoryInSingleMenu">
+    <Value>Show categories in a single menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.CategoryMenuTitle">
+    <Value>Products</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.IncludeManufacturers">
+    <Value>Include Manufacturers</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ManufacturerName">
+    <Value>Manufacturers</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.IncludeTopics">
+    <Value>Include Topics</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ShowTopicContentOnHover">
+    <Value>Show topic content on hover</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.DisplayWithPicture">
+    <Value>Display With Picture</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.MainMenuClass">
+    <Value>Main Menu Class</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.HiddenCategoryIfNoProduct">
+    <Value>Hidden Category If the Category contain no products</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.StickMenuOnTop">
+    <Value>Stick menu on top</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.MenuTitleRequired">
+    <Value>Menu Title is Required.</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.IncludeTopic.ContentAdd">
+    <Value>It will add all topic page to menu which has Include in Topmenu is enable and then link of Goto Content Management</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.ItemSave">
+    <Value>Your menu item has been saved.</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.BackgroundColor">
+    <Value>BackgroundColor</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.FontSize">
+    <Value>FontSize</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.FontColor">
+    <Value>FontColor</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.MobMenuBackHeader">
+    <Value>Mobile Menu Background Header Color</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.SubMenuPictureSize">
+    <Value>Submenu picture size</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.DisplayTitle">
+    <Value>Display submenu title</Value>
+  </LocaleResource>
+  <LocaleResource Name="Media.Custom.ImageLinkTitleFormat">
+    <Value>Show products of {0}</Value>
+  </LocaleResource>
+  <LocaleResource Name="Media.Custom.ImageAlternateTextFormat">
+    <Value>Picture for {0}</Value>
+  </LocaleResource>
+  <LocaleResource Name="MenuManager.FontStyle">
+    <Value>FontStyle</Value>
+  </LocaleResource>
+</Language>

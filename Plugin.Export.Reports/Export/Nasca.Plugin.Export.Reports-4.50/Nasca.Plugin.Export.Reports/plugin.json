@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Nasca Plugins",
+  "FriendlyName": "Export Reports",
+  "SystemName": "ExportReports",
+  "Version": "1.0",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "Nasca team",
+  "DisplayOrder": 1,
+  "FileName": "Nasca.Plugin.Export.Reports.dll",
+  "Description": "This plugin allow admin to export reports as xlsx"
+}

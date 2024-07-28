@@ -1,0 +1,33 @@
+﻿@model FooterModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject IWorkContext workContext
+@inject ISettingService settingService
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var footerLayout = await settingService.GetSettingByKeyAsync("uptownthemesettings.footerlayout", "footer-1", storeId, true);
+    var isFooter1 = string.Compare(footerLayout, "footer-1", StringComparison.InvariantCultureIgnoreCase) == 0;
+
+    var removeCopyright = await settingService.GetSettingByKeyAsync("uptownthemesettings.removecopyright", false, storeId, true);
+    var removeDesignedBy = await settingService.GetSettingByKeyAsync("uptownthemesettings.removedesignedby", false, storeId, true);
+}
+
+<div class="footer-disclaimer">
+    @T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)
+</div>
+@if (Model.DisplayTaxShippingInfoFooter)
+{
+    var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+    <div class="footer-tax-shipping">
+        @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+    </div>
+}
+
+<div class="footer-store-theme">
+    @await Component.InvokeAsync(typeof(StoreThemeSelectorViewComponent))
+</div>

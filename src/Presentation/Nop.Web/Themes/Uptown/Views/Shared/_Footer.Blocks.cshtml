@@ -1,0 +1,144 @@
+﻿@model FooterModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Topics
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var footerLayout = await settingService.GetSettingByKeyAsync("uptownthemesettings.footerlayout", "footer-1", storeId, true);
+    var isFooter1 = string.Compare(footerLayout, "footer-1", StringComparison.InvariantCultureIgnoreCase) == 0;
+}
+
+@if (isFooter1)
+{
+     <div class="footer-block first">
+        <ul class="footer-menu footer-collapse">
+            @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+            {
+                <li><a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+            }
+        </ul>
+    </div>
+    @* <div class="footer-block first">
+        <h3 class="title">
+            <span>@T("SevenSpikes.Themes.Uptown.ContactInfo")</span>
+        </h3>
+        <ul class="footer-menu footer-collapse">
+            <li class="address">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.Address")</span>
+            </li>
+            <li class="phone">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.Phone")</span>
+            </li>
+            <li class="email">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.EmailName")@T("SevenSpikes.Themes.Uptown.Common.EmailAt")@T("SevenSpikes.Themes.Uptown.Common.EmailDomain")</span>
+            </li>
+        </ul>
+        @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
+    </div> *@
+}
+else
+{
+   @*  <div class="footer-block first">
+        <a href="@Url.RouteUrl("HomePage")" class="logo">
+            @await Component.InvokeAsync("Widget", new { widgetZone = "uptown_theme_footer_logo" })
+        </a>
+        <h3 class="title">
+            <span>@T("SevenSpikes.Themes.Uptown.AboutUs.Title")</span>
+        </h3>
+        <p class="footer-about-us footer-collapse">@T("SevenSpikes.Themes.Uptown.AboutUs")</p>
+        @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent))
+    </div> *@
+}
+
+<div class="footer-block">
+   @*  <h3 class="title">
+        <span>@T("SevenSpikes.Themes.Uptown.Information")</span>
+    </h3> *@
+    <ul class="footer-menu footer-collapse">
+       @*  @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+        {
+            <li><a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+        }
+        <li><a href="@Url.RouteUrl("ManufacturerList")">@T("Manufacturers")</a></li> *@
+        @if (Model.DisplayContactUsFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+        }
+        @if (Model.ShoppingCartEnabled && Model.DisplayShoppingCartFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
+        }
+        @if (Model.WishlistEnabled && Model.DisplayWishlistFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
+        }
+    </ul>
+</div>
+
+<div class="footer-block">
+   @*  <h3 class="title">
+        <span>@T("Footer.MyAccount")</span>
+    </h3> *@
+    <ul class="footer-menu footer-collapse">
+        @if (Model.DisplayCustomerInfoFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.CustomerInfo")</a></li>
+        }
+        @if (Model.DisplayCustomerAddressesFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
+        }
+        @if (Model.DisplayCustomerOrdersFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+        }
+       @*  @if (Model.AllowCustomersToApplyForVendorAccount && Model.DisplayApplyVendorAccountFooterItem)
+        {
+            <li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+        } *@
+        @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+        {
+            <li><a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+        }
+    </ul>
+</div>
+
+@* @if (isFooter1)
+{
+    <div class="footer-block last">
+        <h3 class="title">
+            <span>@T("SevenSpikes.Themes.Uptown.AboutUs.Title")</span>
+        </h3>
+        <p class="footer-about-us footer-collapse">@T("SevenSpikes.Themes.Uptown.AboutUs")</p>
+        <ul class="accepted-payment-methods">
+            <li class="method1"></li>
+            <li class="method2"></li>
+            <li class="method3"></li>
+            <li class="method4"></li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="footer-block last">
+        <h3 class="title">
+            <span>@T("SevenSpikes.Themes.Uptown.ContactInfo")</span>
+        </h3>
+        <ul class="footer-menu footer-collapse">
+            <li class="address">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.Address")</span>
+            </li>
+            <li class="phone">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.Phone")</span>
+            </li>
+            <li class="email">
+                <span>@T("SevenSpikes.Themes.Uptown.Common.EmailName")@T("SevenSpikes.Themes.Uptown.Common.EmailAt")@T("SevenSpikes.Themes.Uptown.Common.EmailDomain")</span>
+            </li>
+        </ul>
+    </div>
+} *@

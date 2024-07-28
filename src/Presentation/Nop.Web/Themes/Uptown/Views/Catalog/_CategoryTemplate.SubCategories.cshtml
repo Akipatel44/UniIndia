@@ -1,0 +1,45 @@
+﻿@model CategoryModel
+
+@using Nop.Core.Domain.Catalog
+
+@inject IViewComponentSelector viewComponentSelector
+
+@if (Model.SubCategories.Count > 0)
+{
+    <div class="category-grid sub-category-grid">
+        <div class="item-grid">
+            @foreach (var item in Model.SubCategories)
+            {
+                <div class="item-box">
+                    <div class="sub-category-item">
+                        <h2 class="title">
+                            <a href="@(Url.RouteUrl<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title">
+                                <span class="category-item-text-wrapper">
+                                    <span class="category-item-name">@item.Name</span>
+                                    <span class="category-item-count">@await Component.InvokeAsync("Widget", new { widgetZone = "uptown_category_box_products_count", additionalData = item.Id }) @T("SevenSpikes.Themes.Uptown.Common.Products.Count.Title")</span>
+                                </span>
+                            </a>
+                        </h2>
+                        <div class="picture">
+                            <a href="@(Url.RouteUrl<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title">
+                                @if (viewComponentSelector.SelectComponent("LazyLoadImage") != null)
+                                {
+                                    @await Component.InvokeAsync("LazyLoadImage", new(string Key, string Value)[] 
+                                    {
+                                        ("src", item.PictureModel.ImageUrl),
+                                        ("alt", item.PictureModel.AlternateText),
+                                        ("title", item.PictureModel.Title)
+                                    })
+                                }
+                                else
+                                {
+                                    <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                                }
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

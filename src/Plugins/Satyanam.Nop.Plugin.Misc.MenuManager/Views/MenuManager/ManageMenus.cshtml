@@ -1,0 +1,301 @@
+﻿@model ManageMenuModel
+@using Satyanam.Nop.Plugin.Misc.MenuManager.Models;
+@using Nop.Web.Framework.UI;
+
+@{
+    Layout = "_AdminLayout";
+
+    NopHtml.AppendCssFileParts("~/Plugins/Misc.MenuManager/Themes/DefaultClean/Content/Menumanager.css");
+    NopHtml.AddScriptParts(ResourceLocation.Footer, "~/Plugins/Misc.Menumanager/Scripts/MenuManager.Js");
+}
+<style type="text/css">
+    .k-treeview .k-item {
+        padding: 0 !important;
+    }
+
+    .k-icon, .k-tool-icon {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .k-icon:before {
+        position:relative !important;
+    }
+    </style>
+<div class="card-default card-search">
+    <div class="card-body">
+        <div class="form-group" style="display:block">
+                <div class="content-header clearfix">
+                    <h1 class="pull-left">
+                        @T("MenuManager.ManageMenu")
+                        <small><i class="fa fa-arrow-circle-left"></i><a href="/Admin/Plugin/List">@T("admin.configuration.plugins.misc.backtolist")</a></small>
+                    </h1>
+                    @*<div class="pull-right">
+                            &nbsp;
+                        </div>*@
+                </div>
+                <p id="autoStatus"></p>
+                @await Component.InvokeAsync("StoreScopeConfiguration")
+
+                @*<br />*@
+                <div style="width:100%">
+                    <div style="float:left; margin-right:15px;">
+                    <div class="card-group">
+                        <div class="card-body">
+                                <div class="form-group">
+                                    <div class="">
+                                        <h4>@T("MenuManager.CurrentMenu")</h4>
+                                        <ul id="Menus-tree"></ul><br />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input id="btnSaveTv" type="button" value="save changes" class="btn bg-blue" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left; width:70%;">
+                    <div class="content">
+                        <div class="form-horizontal">
+                        <div class="card-group">
+                            <div class="card card-default card-search">
+                                <div class="card-body">
+                                    <div class="form-group row" style="display:block">
+                                            <div class="col-md-5">
+                                                 <form asp-controller="MenuManager" asp-action="ManageMenus" method="post" id="form0">
+                                                        <div class="message-error">
+                                                            @Html.ValidationSummary(true)
+                                                        </div>
+                                                        @* @Html.HiddenFor(model => model.Flag) *@
+                                                        <div class="form-group">
+                                                            <div class="col-md-4">
+                                                                <input id="frmReset" type="reset" value="Add New" class="btn bg-blue" />
+                                                            </div>
+                                                        </div>
+                                                         <fieldset style="margin-top:10px;">
+                                                            <legend>@T("MenuManager.EditMenu")</legend><!-- Button trigger modal -->
+                                                            @Html.HiddenFor(model => model.Id, new { @id = "hid" })
+                                                           @*  @(NopHtml.LocalizedEditor<ManageMenuModel, MenuLocalizedModel>("manage-menu-localized", *@
+                                                    @(await Html.LocalizedEditorAsync<ManageMenuModel, MenuLocalizedModel>("manage-menu-localized",
+                                                        @<div class="form-group row">
+                                                            <div class="col-md-4">
+                                                                <nop-label asp-for="Locales[item].Title"/>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <nop-editor asp-for="Locales[item].Title" />
+                                                                <span asp-validation-for="Locales[item].Title"/>
+                                                                <input asp-for="Locales[item].LanguageId" type="hidden" />
+                                                            </div>
+                                                        </div>
+                                                        ,
+                                                        @<div class="form-group row">
+                                                            <div class="col-md-5" style="font-weight:bold">
+                                                                <nop-label asp-for="Title" />
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <nop-editor asp-for="Title" />
+                                                                <span asp-validation-for="Title" />
+                                                            </div>
+                                                        </div>
+                                                   ))
+                                                            @if (Model.DisplayWithPicture)
+                                                            {
+                                                        <div class="form-group" id="ExistingPicture" style="display:none;">
+                                                            <div class="col-md-5" style="font-weight:bold">
+                                                                <nop-label asp-for="PictureUrl" />
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <img id="PictureUrl" src="@(Model.PictureUrl)" alt="avatar" /><br />
+                                                                @*<input type="button" value=" Edit " onclick="showUploader();" class="k-button"/>*@
+                                                            </div>
+                                                        </div>
+                                                                        <div class="form-group" id="PictureUploader">
+                                                                            <div class="col-md-5" style="font-weight:bold">
+                                                                                <nop-label asp-for="PictureId" />
+                                                                            </div>
+                                                                            <div class="col-md-7">
+                                                                                <nop-editor asp-for="PictureId" />
+                                                                            </div>
+                                                                        </div>}
+                                                            <div class="form-group"style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="ParentMenuId" />
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <input type="text" asp-for="ParentMenuId" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"style="display:none">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="ParentId" />
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                            <nop-select asp-for="ParentId" asp-items="Model.AvailablePerentMenu" />
+                                                                </div>
+                                                            </div>
+
+                                                    <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="CategoryId" />
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <nop-select asp-for="CategoryId" asp-items="Model.AvailableCategories" />
+                                                                </div>
+                                                            </div>
+
+                                                    <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="ManufacturerId" />
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <nop-select asp-for="ManufacturerId" asp-items="Model.AvailableManufacturer" />
+                                                                </div>
+                                                            </div>
+
+
+                                                            @if (Model.IncludeTopics)
+                                                            {
+                                                         <div class="form-group" style="display:flex">
+                                                            <div class="col-md-5" style="font-weight:bold">
+                                                                <nop-label asp-for="TopicId" />
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <nop-select asp-for="TopicId" asp-items="Model.AvailableTopics" />
+                                                            </div>
+                                                          </div>}
+                                                             <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="MenuOrder" />
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <input type="number" asp-for="MenuOrder" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="PermanentRedirectUrl" />
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <nop-editor asp-for="PermanentRedirectUrl" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5" style="font-weight:bold">
+                                                                    <nop-label asp-for="IsActive" />
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <nop-editor asp-for="IsActive" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5">
+                                                                    <nop-label style="max-width:123px" asp-for="SelectedCustomerRoleIds" />
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <nop-select asp-for="SelectedCustomerRoleIds" asp-items="Model.AvailableCustomerRoles" asp-multiple="true" />
+                                                                    <script type="text/javascript">
+                                                                           $(document).ready(function() {
+                                                                               var rolesIdsInput = $('#@Html.IdFor(model => model.SelectedCustomerRoleIds)').data("kendoMultiSelect");
+                                                                               rolesIdsInput.setOptions({
+                                                                                   autoClose: false,
+                                                                                   filter: "contains"
+                                                                               });
+
+                                                                               @if (Model.AvailableCustomerRoles.Count == 0)
+                                                                       {
+                                                                           <text>
+                                                                               rolesIdsInput.setOptions({
+                                                                                   enable: false,
+                                                                                   placeholder: 'No customer roles available'
+                                                                               });
+                                                                               rolesIdsInput._placeholder();
+                                                                               rolesIdsInput._enable();
+                                                                               </text>
+                                                                       }
+                                                                           });
+                                                                     </script>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" style="display:flex">
+                                                                <div class="col-md-5">
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <input type="submit" value="save" class="btn bg-blue" />
+                                                                    <input type="button" id="menu-delete" class="btn bg-blue" value="@T("Admin.Common.Delete")" />
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="hid" name="hid" value="0" />
+                                                        </fieldset>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Menus-grid"></div>
+
+                  @* <input type="hidden" id="flag" value="@Model.Flag" /> *@
+
+                <script>
+                    $("#menu-delete").click(function () {
+
+                        var e = document.getElementById("hid");
+                        var getValue = e.value;
+
+                        // var modelPropertyValue = $("#flag").val();
+
+                        // var flag = "@Model.Flag";
+
+                         var form = document.getElementById('form0');
+                         form.reset();
+                        $.ajax({
+                            url: '@Url.Action("Delete","MenuManager")',
+                        data: { "id": getValue/* , "true": flag */ },
+                            contentType: 'application/html; charset=utf-8',
+                            type: 'GET',
+                            cache: false,
+                            //dataType: 'html',
+                            success: function (data) {
+                                  // Clear fields here        
+                                   document.getElementById("hid").value = '';
+                                // window.location.reload(true);
+                            window.location.href = '/MenuManager/ManageMenus';
+                        }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+@* <script>
+    function clearFormFields() {
+        // Replace 'form0' with the actual ID of your form
+        var form = document.getElementById('form0');
+        form.reset();
+    }
+
+    // Call the function to clear the form fields when the view is loaded
+    window.onload = clearFormFields;
+</script> *@
+
+@* <script>
+    $(document).ready(function () {
+        $("#menu-save").on("click", function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Update the value of NewPropertyValue
+            var newValue = true; // Replace with the desired value or logic
+            $("#Flag").val(newValue); // Update the hidden input field
+
+            // Submit the form
+            $("#form0").submit();
+        });
+    });
+</script> *@

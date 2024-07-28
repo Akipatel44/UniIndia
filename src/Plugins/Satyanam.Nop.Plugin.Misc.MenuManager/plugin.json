@@ -1,0 +1,10 @@
+﻿{
+  "Group": "Satyanam",
+  "FriendlyName": "Menu Manager",
+  "SystemName": "Satyanam.Nop.Misc.MenuManager",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.60" ],
+  "Author": "Satyanam Info Solution Pvt. Ltd",
+  "DisplayOrder": 1,
+  "FileName": "Satyanam.Nop.Plugin.Misc.MenuManager.dll"
+}

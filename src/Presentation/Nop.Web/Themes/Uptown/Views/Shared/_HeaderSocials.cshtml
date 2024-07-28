@@ -1,0 +1,60 @@
+﻿@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject IWorkContext workContext
+@inject ISettingService settingService
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+
+    var twitterUrl = await settingService.GetSettingByKeyAsync("storeinformationsettings.twitterlink", String.Empty, storeId, true);
+    var instagramUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.instagramurl", String.Empty, storeId, true);
+    var facebookUrl = await settingService.GetSettingByKeyAsync("storeinformationsettings.facebooklink", String.Empty, storeId, true);
+    var googlePlusUrl = await settingService.GetSettingByKeyAsync("storeinformationsettings.googlepluslink", String.Empty, storeId, true);
+    var pinterestUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.pinteresturl", String.Empty, storeId, true);
+    var vimeoUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.vimeourl", String.Empty, storeId, true);
+    var youtubeUrl = await settingService.GetSettingByKeyAsync("storeinformationsettings.youtubelink", String.Empty, storeId, true);
+
+    var newsEnabled = await settingService.GetSettingByKeyAsync("newssettings.enabled", false, storeId, true);
+    var workingLanguageId = (await workContext.GetWorkingLanguageAsync()).Id;   
+}
+
+
+<ul class="header-social-icons">
+    @if (!String.IsNullOrEmpty(twitterUrl))
+    { 
+        <li><a target="_blank" class="twitter" href="@twitterUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+    @if (!String.IsNullOrEmpty(instagramUrl))
+    {
+        <li><a target="_blank" class="instagram" href="@instagramUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+    @if (!String.IsNullOrEmpty(facebookUrl))
+    {
+        <li><a target="_blank" class="facebook" href="@facebookUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+    @if (!String.IsNullOrEmpty(googlePlusUrl))
+    {
+        <li><a target="_blank" class="google" href="@googlePlusUrl" rel="noopener noreferrer"></a></li> 
+    }
+    
+    @if (!String.IsNullOrEmpty(pinterestUrl))
+    {
+        <li><a target="_blank" class="pinterest" href="@pinterestUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+    @if (!String.IsNullOrEmpty(vimeoUrl))
+    {
+        <li><a target="_blank" class="vimeo" href="@vimeoUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+    @if (!String.IsNullOrEmpty(youtubeUrl))
+    {
+        <li><a target="_blank" class="youtube" href="@youtubeUrl" rel="noopener noreferrer"></a></li>
+    }
+    
+</ul>

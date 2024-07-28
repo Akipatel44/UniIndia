@@ -1,0 +1,72 @@
+﻿@model SocialModel
+
+@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+
+@{
+    var storeId = (await storeContext.GetCurrentStoreAsync()).Id;
+    var pinterestUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.pinteresturl", String.Empty, storeId, true);
+    var vimeoUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.vimeourl", String.Empty, storeId, true);
+    var instagramUrl = await settingService.GetSettingByKeyAsync("uptownthemesettings.instagramurl", String.Empty, storeId, true);
+}
+
+<ul class="social-sharing">
+    @if (!String.IsNullOrEmpty(Model.TwitterLink))
+    {
+        <li>
+            <a target="_blank" class="twitter" href="@Model.TwitterLink" rel="noopener noreferrer" aria-label="@T("Footer.FollowUs.Twitter")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+    @if (!String.IsNullOrEmpty(instagramUrl))
+    {
+        <li>
+            <a target="_blank" class="instagram" href="@instagramUrl" rel="noopener noreferrer" aria-label="@T("SevenSpikes.Themes.Uptown.Common.Footer.FollowUs.Instagram")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+    @if (!String.IsNullOrEmpty(Model.FacebookLink))
+    {
+        <li>
+            <a target="_blank" class="facebook" href="@Model.FacebookLink" rel="noopener noreferrer" aria-label="@T("Footer.FollowUs.Facebook")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+    @if (!String.IsNullOrEmpty(Model.YoutubeLink))
+    {
+        <li>
+            <a target="_blank" class="youtube" href="@Model.YoutubeLink" rel="noopener noreferrer" aria-label="@T("Footer.FollowUs.Youtube")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+    @if (!String.IsNullOrEmpty(pinterestUrl))
+    {
+        <li>
+            <a target="_blank" class="pinterest" href="@pinterestUrl" rel="noopener noreferrer" aria-label="@T("SevenSpikes.Themes.Uptown.Common.Footer.FollowUs.Pinterest")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+    @if (!String.IsNullOrEmpty(vimeoUrl))
+    {
+        <li>
+            <a target="_blank" class="vimeo" href="@vimeoUrl" rel="noopener noreferrer" aria-label="@T("SevenSpikes.Themes.Uptown.Common.Footer.FollowUs.Vimeo")">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    }
+   
+</ul>

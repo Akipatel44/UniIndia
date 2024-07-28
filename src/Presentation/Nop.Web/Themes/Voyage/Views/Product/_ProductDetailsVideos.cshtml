@@ -1,0 +1,39 @@
+﻿@model ProductDetailsModel
+
+@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject ISettingService settingService
+@inject IStoreContext storeContext
+
+@{
+    var isExtendedGallery = false;
+    if ((await settingService.GetSettingByKeyAsync("VoyageThemeSettings.ProductPageLayout", "standard-gallery", storeContext.GetCurrentStoreAsync().Id, true)).Equals("extended-gallery"))
+    {
+        isExtendedGallery = true;
+    }
+}
+
+@if (Model.VideoModels.Any())
+{
+    <div class="video-gallery">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsBeforeVideos, additionalData = Model })
+        @if (isExtendedGallery)
+        {
+            @foreach (var video in Model.VideoModels)
+            {
+                <iframe class="thumb-item" src="@video.VideoUrl" width="@video.Width" height="@video.Height" frameborder="0" allow="@video.Allow"></iframe>
+            }
+        }
+        else
+        {
+            <div class="video-thumbs">
+                @foreach (var video in Model.VideoModels)
+                {
+                    <iframe class="thumb-item" src="@video.VideoUrl" width="@video.Width" height="@video.Height" frameborder="0" allow="@video.Allow"></iframe>
+                }
+            </div>
+        }
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsAfterVideos, additionalData = Model })
+    </div>
+}

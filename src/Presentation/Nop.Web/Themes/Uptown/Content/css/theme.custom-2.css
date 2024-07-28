@@ -1,0 +1,373 @@
+/*  BACKGROUND COLOR  */
+
+.link-rss,
+.ui-dialog .back-in-stock-subscription-page button:hover,
+.eu-cookie-bar-notification button:hover,
+#goToTop,
+.mini-shopping-cart button:hover,
+.mini-shopping-cart button:first-child:hover,
+.newsletter-box-button:before,
+.newsletter-box-button:hover,
+.footer-block .title span:after,
+.footer-2 .footer-block .title span:after,
+.social-sharing a .flip,
+.social-sharing a .flop,
+.footer-2 .newsletter-email .newsletter-subscribe-button,
+.footer-2 .footer-menu .address span:before,
+.footer-2 .footer-menu .phone span:before,
+.footer-2 .footer-menu .email span:before,
+.poll .buttons button:hover,
+.item-box .swiper-pagination-bullet-active,
+.item-box button:hover,
+.item-box button.product-box-add-to-cart-button:hover,
+.pager li span,
+.pager li a:hover,
+.vendor-list a:hover,
+.contact-vendor button:hover,
+.gallery .picture-thumbs a.active:before,
+.overview .add-to-wishlist:hover:before,
+.overview .compare-products:hover:before,
+.overview .email-a-friend:hover:before,
+.overview .back-in-stock-subscription:hover:before,
+.overview .download-sample:hover:before,
+.product-review-box .rating div,
+.overview .add-to-cart-button:hover,
+.variant-overview .add-to-cart-button:hover,
+.variant-overview .add-to-wishlist button:hover,
+.write-review .button-1:hover,
+.wishlist-content .button-2:hover,
+.wishlist-content .button-2.wishlist-add-to-cart-button,
+.compare-products-page .button-2:hover,
+.contact-page .button-1:hover,
+.email-a-friend-page .button-1:hover,
+.apply-vendor-page .button-1:hover,
+#check-availability-button:hover,
+.registration-page .button-1:hover,
+.registration-result-page .button-1:hover,
+.login-page .button-1:hover,
+.password-recovery-page .button-1:hover,
+.account-page .button-1:hover,
+.return-request-page .button-1:hover,
+.user-agreement-page .button-1:hover,
+.login-page .button-1.login-button,
+.login-page .button-1.login-button:hover,
+.account-page-navigation .account-navigation-list li.active a:before,
+.account-page-navigation .account-navigation-list li a:hover:before,
+.account-page .button-2:hover,
+.order-progress li.active-step a:before,
+.shopping-cart-page .button-1:hover,
+.checkout-page .button-1:hover,
+.cart-options .button-2.continue-shopping-button,
+.cart-options .button-2:hover,
+.cart-collaterals .button-2:hover,
+.opc .back-link a:hover,
+.order-details-page .page-title a:hover:before,
+.order-details-page .actions button:hover,
+.search-input .button-1:hover,
+.blog-page .blog-posts .read-more:hover,
+.news-list-page .news-items .read-more:hover,
+.new-comment .button-1:hover,
+.topic-post .pm-button:hover,
+.profile-info-box .pm-button:hover,
+.forum-edit-page .buttons button:hover,
+.move-topic-page .buttons button:hover,
+.private-messages .buttons button:hover,
+button.apply-shipping-button:hover,
+button.estimate-shipping-radio:checked + label,
+.cart-options .estimate-shipping-button:hover,
+/*plugins*/ .productAddedToCartWindowSummary a:hover,
+.productAddedToCartWindowSummary .button-1:hover,
+.ui-slider-range,
+.filtersGroupPanel li.checked label:before,
+.nivo-controlNav a:hover:before,
+.nivo-controlNav a.active:before,
+.anywhere-slider .slick-active button:before,
+.nop-jcarousel .slick-prev:hover,
+.nop-jcarousel .slick-next:hover,
+.nop-jcarousel .slick-dots button:hover:before,
+.nop-jcarousel .slick-dots .slick-active button:before,
+.products-carousel .item-picture .button:hover,
+.quick-view-button a:hover,
+.blog-page .buttons .read-more:hover,
+.share-post a .flip,
+.share-post a .flop,
+.post-navigation a .flop,
+.sale-of-the-day-offer .title,
+.sale-of-the-day-offer .go-to-product-page:hover,
+.sale-of-the-day-offer li.slick-active button:before,
+.ropc .estimate-shipping button:hover,
+.ropc .coupon-box-panel .coupon-code button:hover,
+.ropc .giftcard-box-panel .coupon-code button:hover,
+.ropc .complete-button button:hover,
+#newTicket a:hover:before,
+#myTickets a:hover:before,
+#manageTickets a:hover:before,
+.overview .submit-ticket:hover:before,
+.inputs.upload .k-button.k-upload-button:hover span,
+.page-body form > .buttons .k-button:hover,
+.page-body form > .buttons .return-to-ticket.k-button:hover,
+.page-body form > .buttons .k-button.return-to-ticket-button:hover,
+.ticket-buttons .k-button:hover,
+#submit-reply .buttons .k-button:hover,
+.view-ticket-notes-page .ticket-buttons .show-add-note.k-button:hover,
+.my-tickets-page .clear-filters:hover,
+.manage-tickets-page .clear-filters:hover,
+.product-filters .ui-slider-range,
+.product-filters input[type="radio"]:checked + label:before,
+input[type="checkbox"]:checked ~ label:before {
+  background-color: #ab9683;
+}
+.enter-password-form button:hover,
+.k-pager-numbers span.k-state-selected,
+.k-pager-numbers a:hover {
+  background-color: #ab9683 !important;
+}
+/*  COLOR  */
+
+.eu-cookie-bar-notification a,
+.mini-shopping-cart a:hover,
+.mini-shopping-cart .count a:hover,
+.mini-shopping-cart .totals strong,
+.footer-lower a,
+.block .active > a,
+.block .view-all a,
+.poll strong,
+.breadcrumb a:hover,
+.category-description a:hover,
+.manufacturer-description a:hover,
+.vendor-description a:hover,
+.manufacturer-item-count,
+.vendor-item-count,
+.item-box .product-title a:hover,
+.item-box .rating div,
+.item-box .actual-price,
+.item-box .tax-shipping-info a:hover,
+.overview .value,
+.variant-overview .value,
+.free-shipping,
+.product-no-reviews a:hover,
+.product-review-links a:hover,
+.overview .value a,
+.variant-overview .value a,
+.overview .prices > div,
+.variant-overview .prices > div,
+.overview .product-price,
+.variant-overview .product-price,
+.overview .prices .tax-shipping-info a:hover,
+.variant-overview .prices .tax-shipping-info a:hover,
+.tier-prices .item-price,
+.product-tags-list a:hover,
+.ui-datepicker-calendar td a:hover,
+.ui-datepicker-today,
+.product-reviews-page h1 a:hover,
+.product-review-helpfulness .vote:hover,
+.wishlist-content .tax-shipping-info a:hover,
+.wishlist-page .share-info a,
+.topic-block a,
+.topic-page a,
+.email-a-friend-page .title h2 a:hover,
+#check-availability-button:hover,
+.accept-privacy-policy a:hover,
+.accept-privacy-policy span:hover,
+.add-more-external-records a,
+.login-page .returning-wrapper .forgot-password a:hover,
+.return-request-list-page a:hover,
+.order-summary-content .tax-shipping-info a:hover,
+.cart-total .order-total .cart-total-right,
+.terms-of-service a:hover,
+.order-completed .details a:hover,
+.order-details-page .cart-total tr:last-of-type strong,
+.sitemap-page a:hover,
+.blog-page .tags a:hover,
+.blogpost-page .tags a:hover,
+.blog-posts .buttons .read-comments:hover,
+.comment-info .username:hover,
+.news-list-homepage .news-items .read-more,
+.news-list-homepage .view-all a,
+.post-title:hover,
+.news-title:hover,
+.forum-search-box .advanced a,
+.topic-post .post-actions .post-link-button,
+.topic-post .post-actions .quote-post-button,
+.private-message-send-page a:hover,
+.profile-page .topic-title a,
+.cart a:hover,
+.data-table a:hover,
+.compare-products-table a:hover,
+.forums-table-section a:hover,
+td.subtotal,
+td.total,
+.compare-products-table .product-price td,
+div.product-estimate-shipping .shipping-title .shipping-price,
+/*plugins*/ .productAddedToCartWindowDescription h1 a:hover,
+.productAddedToCartWindowDescription .price,
+.selected-options-list > li span,
+.instant-search-item .detail .price,
+.products-carousel .item-info .actual-price,
+.quickView .links-panel a:hover,
+.rich-blog-homepage .post-title:hover,
+.rich-blog-homepage .read-more,
+.rich-blog-homepage .title:hover strong,
+.post-relations li,
+.search-term-highlighter,
+.sale-of-the-day-offer .product-name h4:hover,
+.sale-of-the-day-offer .timer-group .timer-info-box,
+.sale-of-the-day-offer .price.actual-price,
+.ropc .error-list,
+.feed-panel .instagram-follow-us a,
+.twitter-feed .user-profile .user-name:hover,
+.twitter-feed .post-body a,
+.spc-categories .category-details li a:hover,
+.ticket-comments .comment-header .left a,
+.anywhere-page-map .align-map-button,
+.shop-full-description a,
+.social-feed .sub-title a {
+  color: #ab9683;
+}
+/*  BORDER-COLOR  */
+
+.item-box button:hover,
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
+.ui-tabs .ui-state-active.ui-tabs-active a,
+/*plugins*/ .products-carousel .item-picture .button:hover,
+.quick-view-button a:hover,
+.spc .navigation li.active,
+.view-ticket-notes-page .ticket-buttons .show-add-note.k-button:hover,
+input.estimate-shipping-radio:checked + label,
+.product-filters input[type="radio"]:checked + label:before {
+  border-color: #ab9683;
+}
+@media all and (min-width: 769px) {
+  /*  BACKGROUND COLOR  */
+  
+  .product-list .item-box button.product-box-add-to-cart-button:hover {
+    background-color: #ab9683;
+  }
+}
+@media all and (min-width: 1025px) {
+  /*  BACKGROUND COLOR  */
+  
+  .header-links .my-account-dropdown a:hover:before,
+  .cart-wrapper .ico-cart:before,
+  .cart-wrapper .ico-cart-total,
+  /*plugins*/ .previous-product-title,
+  .next-product-title,
+  .with-caregory-search-enabled .custom-select-text:before {
+    background-color: #ab9683;
+  }
+  /*  COLOR  */
+  
+  .header-menu > ul > li:hover > a,
+  .header-menu > ul > li:hover > span,
+  .header-menu .sublist li:hover > a,
+  .block .list a:hover,
+  .block .tags li a:hover,
+  .product-tags-all-page li a:hover,
+  .topic-post .username:hover,
+  /*plugins*/ .filtersGroupPanel li > label:hover,
+  .mega-menu .box a:hover,
+  .mega-menu li a.view-all {
+    color: #ab9683;
+  }
+}
+/*Homepage Cart Wapper*/
+
+.header-cart-search-wrapper .cart-wrapper {
+  display: none;
+}
+
+/*Homepage Search Box*/
+
+.header-cart-search-wrapper .store-search-box {
+  display: none;
+}
+
+/*Homepage Header Link*/
+
+.header-links a {
+  display: none;
+}
+
+/*Homepage Welcome Message*/
+
+.header-welcome-message {
+  display: none;
+}
+
+/*Homepage Payment Method*/
+
+.accepted-payment-methods {
+  display: none;
+}
+
+/*Content Text Color*/
+
+.topic-page .page-body {
+    color: #8E807A;
+}
+
+/*Homepage Content topic hidden*/
+
+.topic-page-body .page-title {
+    display: none;
+}
+
+/*Homepage topic block title*/
+
+.topic-block-title {
+    display: none;
+}
+
+/*Homepage newssubcription hidden*/
+
+.footer-1 .footer-upper>div:only-child {
+    display: none;
+}
+
+/*Topic footer newssubcription hidden*/
+
+.footer-1 .footer-upper>div:only-child {
+    display: none;
+}
+
+/*Header-upper background color*/
+
+.header-upper {
+    background: #AB9683;
+}
+
+.header-selectors-wrapper select {
+    background: #AB9683 url(../Themes/Uptown/Content/img/header-selectors-arrow.png) no-repeat right 6px center;
+    font: normal 12px 'Montserrat',sans-serif;
+    color: #E4BB7D;
+}
+
+/*Footer social icon border*/
+
+.social-sharing li {
+    border: 0px solid #585858;
+}
+
+/* Footer font color*/
+
+.footer-middle {
+    color: #E4BB7D;
+}
+
+/* Footer background (If repeat image, add repeat-x at the back*/
+
+.footer-middle {
+    background: url(https://www.melrosier.com/Support/Sources/Images/MELROSIERBACKGROUND2A.png);
+}
+
+/* News background color*/
+
+.topic-page .page-body {
+    background-image: url(https://www.melrosier.com/Support/Sources/Images/MELROSIERBACKGROUND1C.png);
+}
+
+/*Contact us page title hidden*/
+
+.page-title {
+    display: none;
+}
